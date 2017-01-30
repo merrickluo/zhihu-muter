@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - "6"
+cache: yarn
+before_script:
+  - npm install eslint eslint-plugin-standard
+script:
+  - eslint mute.js --debug
