@@ -71,6 +71,39 @@ function log(msg) {
   }
 }
 
+waitForKeyElements(Magic.timelineFoldItem, function() {
+	log("triggered timeline");
+	timeline_item_mute(keywords);
+});
+waitForKeyElements(Magic.releventQuestions, (node) => {
+  log("treiggered relevent");
+	hide(node);
+	log('No more suggestions on relevent questions.');
+});
+
+waitForKeyElements('zm-item-comment', (node) => {    
+  log("triggered comment");
+	tomute = mutelist;
+	for (var j = 0, len = tomute.length; j < len; j++) {
+    var muteword = tomute[j];
+    if (e.getElementsByClassName(Magic.answerComment)[0].innerHTML.search(muteword) > -1) {
+      hide(e);
+    }
+  }
+});
+
+waitForKeyElements('zm-item-answer', (node) => {
+  log('triggered answer');
+	tomute = mutelist;
+	mutelist_length = mutelist.length;
+	for (var j = 0; j < mutelist_length; j++) {
+    var muteword = tomute[j];
+    if (e.getElementsByClassName(Magic.authorInfo)[0].innerHTML.search(muteword) > -1) {
+      hide(e);
+    }
+  }
+});
+
 
 // 1. Answer
 // 1.1 Answers by specific ids
@@ -208,28 +241,28 @@ if (top_column_info_hidden === 1 && not_zhuanlan) {
 
 // 2. Methods that are not always used
 // 2.1 Question/Answer page
-if (hrefValue.search('question') > -1) {
-  // Relevent question suggestion column
-  if (relevent_questions === 1) {
-    var relevent = document.getElementsByClassName(Magic.releventQuestions);
-    hide(relevent);
-    log('No more suggestions on relevent questions.');
-  }
+// if (hrefValue.search('question') > -1) {
+//   // Relevent question suggestion column
+//   if (relevent_questions === 1) {
+//     var relevent = document.getElementsByClassName(Magic.releventQuestions);
+//     hide(relevent);
+//     log('No more suggestions on relevent questions.');
+//   }
 
-  // Scroll listener to mute answers and comments
-  if (document.addEventListener) {
-    document.addEventListener(Magic.event, function (event) {
-      comment_mute('zm-item-comment', mutelist);
-      answer_mute('zm-item-answer', mutelist);
-    }, false);
-  }
-}
+//   // Scroll listener to mute answers and comments
+//   if (document.addEventListener) {
+//     document.addEventListener(Magic.event, function (event) {
+//       comment_mute('zm-item-comment', mutelist);
+//       answer_mute('zm-item-answer', mutelist);
+//     }, false);
+//   }
+// }
 
 // 2.2 Timeline
-if (hrefValue.search('question') === -1) {
-  if (document.addEventListener) {
-    document.addEventListener(Magic.event, function (event) {
-      timeline_item_mute(keywords);
-    }, false);
-  }
-}
+// if (hrefValue.search('question') === -1) {
+//   if (document.addEventListener) {
+//     document.addEventListener(Magic.event, function (event) {
+//       timeline_item_mute(keywords);
+//     }, false);
+//   }
+// }

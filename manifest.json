@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "Zhihu muter",
   "description": "Clean up your timeline and answer page.",
@@ -12,6 +12,6 @@
 
   "content_scripts": [{
     "matches": ["http://*.zhihu.com/*", "https://*.zhihu.com/*"],
-    "js": ["mute.js"]
+    "js": ["jquery-3.1.1.slim.min.js", "waitForKeyElements.js", "mute.js"]
   }]
  }
